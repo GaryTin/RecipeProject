@@ -2,13 +2,12 @@ package com.bsharp.recipe.Recipe.config;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.boot.autoconfigure.flyway.FlywayProperties;
-import org.springframework.boot.autoconfigure.r2dbc.R2dbcProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties({ FlywayProperties.class})
+@EnableConfigurationProperties({FlywayProperties.class})
 class FlywayConfig {
     @Bean(initMethod = "migrate")
     public Flyway flyway(FlywayProperties flywayProperties) {
@@ -18,7 +17,9 @@ class FlywayConfig {
                         flywayProperties.getUser(),
                         flywayProperties.getPassword()
                 )
-                .locations(flywayProperties.getLocations().toArray(String[]::new))
+                .locations(flywayProperties.getLocations()
+                        .stream()
+                        .toArray(String[]::new))
                 .baselineOnMigrate(true)
                 .load();
     }
