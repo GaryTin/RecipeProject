@@ -1,25 +1,23 @@
-package com.bsharp.recipe.Recipe.entity;
+package com.bsharp.recipe.Recipe.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.bsharp.recipe.Recipe.entity.enums.IngredientType;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.relational.core.mapping.Table;
 
-@EqualsAndHashCode(callSuper = true)
-@SuperBuilder
-@AllArgsConstructor
 @Data
+@SuperBuilder
 @NoArgsConstructor
-@Table("ingredient")
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Ingredient extends BaseEntity {
-    String id;
+public class AddIngredientRequest {
     String name;
     String description;
-
+    IngredientType type;
 }
