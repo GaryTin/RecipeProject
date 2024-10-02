@@ -15,4 +15,8 @@ public interface IngredientService {
     List<IngredientEntity> addAllIngredients(AddAllIngredientRequest request);
 
     Page<IngredientEntity> getAllIngredients(IngredientQueryParmas parmas, Pageable pageable);
+
+    IngredientEntity updateIngredient(String id, AddIngredientRequest request);
+
+    void deleteIngredient(String id);
 }

@@ -54,4 +54,19 @@ public class IngredientServiceImpl implements IngredientService {
     public Page<IngredientEntity> getAllIngredients(IngredientQueryParmas parmas, Pageable pageable) {
         return ingredientViewRepository.getIngredients(parmas, pageable);
     }
+
+    @Override
+    public IngredientEntity updateIngredient(String id, AddIngredientRequest request) {
+        IngredientEntity ingredient = ingredientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ingredient not found")); //TODO: create custom exception
+        ingredient.setName(request.getName());
+        ingredient.setDescription(request.getDescription());
+        ingredient.setType(request.getType());
+        return ingredientRepository.save(ingredient);
+    }
+
+    @Override
+    public void deleteIngredient(String id) {
+        ingredientRepository.deleteById(id);
+    }
 }
