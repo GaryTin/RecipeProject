@@ -14,7 +14,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-@Table("ingredient")
+@Table("recipe_ingredient")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)

@@ -4,6 +4,9 @@ import com.bsharp.recipe.Recipe.dto.request.AddAllIngredientRequest;
 import com.bsharp.recipe.Recipe.dto.request.AddIngredientRequest;
 import com.bsharp.recipe.Recipe.dto.request.IngredientQueryParmas;
 import com.bsharp.recipe.Recipe.entity.IngredientEntity;
+import com.bsharp.recipe.Recipe.entity.enums.TableNameEnum;
+import com.bsharp.recipe.Recipe.exception.RecipeDatabaseExceptionEnum;
+import com.bsharp.recipe.Recipe.exception.RecipeDatabaseRuntimeException;
 import com.bsharp.recipe.Recipe.repository.IngredientRepository;
 import com.bsharp.recipe.Recipe.repository.IngredientViewRepository;
 import com.bsharp.recipe.Recipe.service.IngredientService;
@@ -58,7 +61,7 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public IngredientEntity updateIngredient(String id, AddIngredientRequest request) {
         IngredientEntity ingredient = ingredientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ingredient not found")); //TODO: create custom exception
+                .orElseThrow(() -> new RecipeDatabaseRuntimeException(RecipeDatabaseExceptionEnum.INGREDIENT_NOT_FOUND, "db_recipe", TableNameEnum.INGREDIENT));
         ingredient.setName(request.getName());
         ingredient.setDescription(request.getDescription());
         ingredient.setType(request.getType());
