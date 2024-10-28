@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.*;
 import org.springframework.data.relational.core.mapping.Column;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @SuperBuilder
@@ -18,7 +19,7 @@ public abstract class BaseEntity {
 
     @Column("CREATE_DATE_TIME")
     @CreatedDate
-    private ZonedDateTime createDateTime;
+    private LocalDateTime createDateTime;
 
     @Column("UPDATED_BY")
     @LastModifiedBy
@@ -26,7 +27,7 @@ public abstract class BaseEntity {
 
     @Column("UPDATE_DATE_TIME")
     @LastModifiedDate
-    private ZonedDateTime updateDateTime;
+    private LocalDateTime updateDateTime;
 
     @Version
     private Integer version; // Represents the version number of the entity. It is used for optimistic locking.
