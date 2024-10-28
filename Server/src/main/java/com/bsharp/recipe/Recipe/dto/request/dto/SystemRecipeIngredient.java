@@ -1,7 +1,7 @@
 package com.bsharp.recipe.Recipe.dto.request.dto;
 
 
-import com.bsharp.recipe.Recipe.entity.enums.IngredientType;
+import com.bsharp.recipe.Recipe.entity.RecipeIngredientEntity;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
@@ -17,8 +17,13 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class RecipeIngredientBaseClass {
-    String name;
-    String description;
-    IngredientType type;
+public class SystemRecipeIngredient {
+    String ingredientId;
+
+    public RecipeIngredientEntity toEntity(String recipeId) {
+        return RecipeIngredientEntity.builder()
+                .ingredientId(this.ingredientId)
+                .recipeId(recipeId)
+                .build();
+    }
 }

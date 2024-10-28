@@ -59,6 +59,12 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
+    public IngredientEntity getIngredient(String id) {
+        return ingredientRepository.findById(id)
+                .orElseThrow(() -> new RecipeDatabaseRuntimeException(RecipeDatabaseExceptionEnum.INGREDIENT_NOT_FOUND, "db_recipe", TableNameEnum.INGREDIENT));
+    }
+
+    @Override
     public IngredientEntity updateIngredient(String id, AddIngredientRequest request) {
         IngredientEntity ingredient = ingredientRepository.findById(id)
                 .orElseThrow(() -> new RecipeDatabaseRuntimeException(RecipeDatabaseExceptionEnum.INGREDIENT_NOT_FOUND, "db_recipe", TableNameEnum.INGREDIENT));
