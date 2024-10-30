@@ -2,6 +2,7 @@ package com.bsharp.recipe.Recipe.service;
 
 import com.bsharp.recipe.Recipe.dto.request.AddAllIngredientRequest;
 import com.bsharp.recipe.Recipe.dto.request.AddIngredientRequest;
+import com.bsharp.recipe.Recipe.dto.request.AddIngredientsWithReceiptRequest;
 import com.bsharp.recipe.Recipe.dto.request.IngredientQueryParmas;
 import com.bsharp.recipe.Recipe.entity.IngredientEntity;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,8 @@ public interface IngredientService {
     List<IngredientEntity> addAllIngredients(AddAllIngredientRequest request);
 
     Page<IngredientEntity> getAllIngredients(IngredientQueryParmas parmas, Pageable pageable);
+
+    List<IngredientEntity> addIngredientsWithRecipe(AddIngredientsWithReceiptRequest request);
 
     IngredientEntity getIngredient(String id);
 

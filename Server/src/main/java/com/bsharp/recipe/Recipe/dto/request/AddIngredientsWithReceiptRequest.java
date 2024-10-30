@@ -1,5 +1,4 @@
-package com.bsharp.recipe.Recipe.dto.request.dto;
-
+package com.bsharp.recipe.Recipe.dto.request;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @SuperBuilder
@@ -18,9 +17,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ExtraRecipeIngredient {
-    String name;
-    String description;
-    BigDecimal amount;
-    String unit;
+public class AddIngredientsWithReceiptRequest {
+    List<AddIngredientWithRecipeRequest> ingredients;
 }

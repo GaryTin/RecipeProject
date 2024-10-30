@@ -1,14 +1,9 @@
 package com.bsharp.recipe.Recipe.service;
 
-import com.bsharp.recipe.Recipe.dto.request.AddAllIngredientRequest;
-import com.bsharp.recipe.Recipe.dto.request.AddIngredientRequest;
-import com.bsharp.recipe.Recipe.dto.request.IngredientQueryParmas;
-import com.bsharp.recipe.Recipe.entity.IngredientEntity;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-import java.util.List;
+import com.bsharp.recipe.Recipe.dto.request.CreateRecipeRequest;
+import com.bsharp.recipe.Recipe.entity.RecipeEntity;
 
 public interface RecipeService {
 
+    RecipeEntity createRecipe(CreateRecipeRequest request);
 }

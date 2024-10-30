@@ -25,12 +25,13 @@ public class RecipeServiceImpl implements RecipeService {
     private final RecipeIngredientRepository recipeIngredientRepository;
     private final ObjectMapper objectMapper;
 
+    @Override
     public RecipeEntity createRecipe(CreateRecipeRequest request) {
         validateSystemIngredient(request.getSystemIngredients());
         return saveRecipe(request);
     }
 
-    private RecipeEntity saveRecipe(CreateRecipeRequest request){
+    private RecipeEntity saveRecipe(CreateRecipeRequest request) {
         JsonNode extraRecipeIngredients = objectMapper.convertValue(request.getExtraRecipeIngredients(), JsonNode.class);
 
         RecipeEntity newRecipe = recipeRepository.save(RecipeEntity.builder()
@@ -38,6 +39,11 @@ public class RecipeServiceImpl implements RecipeService {
                 .description(request.getDescription())
                 .instructions(request.getInstructions())
                 .externalIngredients(extraRecipeIngredients.toString())
+                .preparationTime(request.getPreparationTime())
+                .cookTime(request.getCookTime())
+                .imageUrl(request.getImageUrl())
+                .servings(request.getServings())
+                .difficulty(request.getDifficulty())
                 .build());
 
         request.getSystemIngredients()
@@ -48,7 +54,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     private void validateSystemIngredient(List<SystemRecipeIngredient> requestSystemIngredients) {
-       requestSystemIngredients.forEach(requestSystemIngredient -> ingredientService.getIngredient(requestSystemIngredient.getIngredientId()));
+        requestSystemIngredients.forEach(requestSystemIngredient -> ingredientService.getIngredient(requestSystemIngredient.getIngredientId()));
     }
 
 }
