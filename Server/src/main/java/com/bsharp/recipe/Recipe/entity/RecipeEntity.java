@@ -25,4 +25,10 @@ public class RecipeEntity extends BaseEntity {
     String description;
     String instructions;
     String externalIngredients; //JsonNode object, List<IngredientEntity> object
+    Integer preparationTime;
+    Integer cookTime;
+    Integer servings;
+    String imageUrl;
+    Integer difficulty;
+
 }

@@ -25,4 +25,5 @@ public class IngredientEntity extends BaseEntity {
     String name; // Name of the ingredient, need to be unique
     String description;
     IngredientType type;
+    String recipeId; // Recipe id for recipe of this ingredient
 }
