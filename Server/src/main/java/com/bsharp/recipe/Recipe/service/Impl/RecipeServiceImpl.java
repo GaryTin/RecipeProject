@@ -5,6 +5,7 @@ import com.bsharp.recipe.Recipe.dto.request.dto.SystemRecipeIngredient;
 import com.bsharp.recipe.Recipe.entity.RecipeEntity;
 import com.bsharp.recipe.Recipe.repository.RecipeIngredientRepository;
 import com.bsharp.recipe.Recipe.repository.RecipeRepository;
+import com.bsharp.recipe.Recipe.service.IngredientQueryService;
 import com.bsharp.recipe.Recipe.service.RecipeService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RecipeServiceImpl implements RecipeService {
 
-    private final IngredientServiceImpl ingredientService;
+    private final IngredientQueryService ingredientQueryService;
     private final RecipeRepository recipeRepository;
     private final RecipeIngredientRepository recipeIngredientRepository;
     private final ObjectMapper objectMapper;
@@ -54,7 +55,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     private void validateSystemIngredient(List<SystemRecipeIngredient> requestSystemIngredients) {
-        requestSystemIngredients.forEach(requestSystemIngredient -> ingredientService.getIngredient(requestSystemIngredient.getIngredientId()));
+        requestSystemIngredients.forEach(requestSystemIngredient -> ingredientQueryService.getIngredient(requestSystemIngredient.getIngredientId()));
     }
 
 }

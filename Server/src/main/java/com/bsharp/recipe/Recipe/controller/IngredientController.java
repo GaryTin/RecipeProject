@@ -5,6 +5,7 @@ import com.bsharp.recipe.Recipe.dto.request.AddIngredientRequest;
 import com.bsharp.recipe.Recipe.dto.request.AddIngredientsWithReceiptRequest;
 import com.bsharp.recipe.Recipe.dto.request.IngredientQueryParmas;
 import com.bsharp.recipe.Recipe.entity.IngredientEntity;
+import com.bsharp.recipe.Recipe.service.IngredientQueryService;
 import com.bsharp.recipe.Recipe.service.IngredientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,8 @@ import java.util.List;
 public class IngredientController {
 
     private final IngredientService ingredientService;
+    private final IngredientQueryService ingredientQueryService;
+
 
     @PostMapping("/ingredient")
     public IngredientEntity addIngredient(@RequestBody AddIngredientRequest request) {
@@ -41,7 +44,7 @@ public class IngredientController {
     @GetMapping("/ingredient")
     public Page<IngredientEntity> getIngredients(@Valid IngredientQueryParmas parmas,
                                                  Pageable pageable) {
-        return ingredientService.getAllIngredients(parmas, pageable);
+        return ingredientQueryService.getAllIngredients(parmas, pageable);
     }
 
     @PutMapping("/ingredient/{id}")

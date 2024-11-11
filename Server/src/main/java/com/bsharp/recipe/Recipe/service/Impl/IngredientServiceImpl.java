@@ -1,22 +1,20 @@
 package com.bsharp.recipe.Recipe.service.Impl;
 
-import com.bsharp.recipe.Recipe.dto.request.*;
+import com.bsharp.recipe.Recipe.dto.request.AddAllIngredientRequest;
+import com.bsharp.recipe.Recipe.dto.request.AddIngredientRequest;
+import com.bsharp.recipe.Recipe.dto.request.AddIngredientsWithReceiptRequest;
+import com.bsharp.recipe.Recipe.dto.request.CreateRecipeRequest;
 import com.bsharp.recipe.Recipe.entity.IngredientEntity;
 import com.bsharp.recipe.Recipe.entity.enums.TableNameEnum;
 import com.bsharp.recipe.Recipe.exception.RecipeDatabaseExceptionEnum;
 import com.bsharp.recipe.Recipe.exception.RecipeDatabaseRuntimeException;
 import com.bsharp.recipe.Recipe.repository.IngredientRepository;
-import com.bsharp.recipe.Recipe.repository.IngredientViewRepository;
-import com.bsharp.recipe.Recipe.repository.RecipeIngredientRepository;
-import com.bsharp.recipe.Recipe.repository.RecipeRepository;
 import com.bsharp.recipe.Recipe.service.IngredientService;
 import com.bsharp.recipe.Recipe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,9 +27,6 @@ import java.util.UUID;
 public class IngredientServiceImpl implements IngredientService {
 
     private final IngredientRepository ingredientRepository;
-    private final RecipeRepository recipeRepository;
-    private final RecipeIngredientRepository recipeIngredientRepository;
-    private final IngredientViewRepository ingredientViewRepository;
 
     private final RecipeService recipeService;
 
@@ -60,11 +55,6 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public Page<IngredientEntity> getAllIngredients(IngredientQueryParmas parmas, Pageable pageable) {
-        return ingredientViewRepository.getIngredients(parmas, pageable);
-    }
-
-    @Override
     public List<IngredientEntity> addIngredientsWithRecipe(AddIngredientsWithReceiptRequest request) {
         return request.getIngredients().stream()
                 .map(ingredient -> {
@@ -78,11 +68,6 @@ public class IngredientServiceImpl implements IngredientService {
                 .toList();
     }
 
-    @Override
-    public IngredientEntity getIngredient(String id) {
-        return ingredientRepository.findById(id)
-                .orElseThrow(() -> new RecipeDatabaseRuntimeException(RecipeDatabaseExceptionEnum.INGREDIENT_NOT_FOUND, "db_recipe", TableNameEnum.INGREDIENT));
-    }
 
     @Override
     public IngredientEntity updateIngredient(String id, AddIngredientRequest request) {
